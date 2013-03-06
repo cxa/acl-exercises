@@ -1,0 +1,87 @@
+1.
+(a) 14
+(b) (1 5)
+(c) 7
+(d) (NIL 3)
+
+2.
+- (cons 'a (cons 'b (cons 'c nil)))
+- (cons 'a '(b c))
+- (cons 'a (cons 'b '(c)))
+
+3.
+(defun fourth (lst)
+  (car (cdr (cdr (cdr lst)))))
+
+4.
+(defun max (x y)
+  (if (> x y)
+      x
+      y))
+
+5.
+(a) Check if the list contains a nil.
+(b) return the first index of x in y, if x is not a member of y, return nil.
+
+6.
+(a) car
+(b) or
+(c) apply
+
+7.
+(defun has_list_inside (lst)
+  (if (not (null lst))
+      (if (listp (car lst))
+          t
+          (has_list_inside (cdr lst)))))
+
+8.
+(a)
+iterative:
+(defun print_dots_iter (n)
+  (do ((i 0 (+ i 1)))
+      ((> i n))
+    (format t ".")))
+
+recursive:
+(defun print_dots_recursive (n)
+  (if (> n 0)
+      (progn
+        (format t ".")
+        (print_dots_recursive (- n 1)))))
+
+(b)
+iterative:
+(defun symbol_counter_iter (lst sym)
+  (let ((counter 0))
+    (dolist (el lst)
+      (if (eql el sym)
+          (setf counter (+ counter 1))))
+    counter))
+
+recursive:
+(defun symbol_counter_recursive (lst sym)
+  (if (null lst)
+      0
+      (+ (symbol_counter_recursive (cdr lst) sym) (if (eql (car lst) sym) 1 0))))
+
+9.
+(a) `lst' is untouched by calling `remove'.
+
+(defun summit (lst)
+  (let ((lst (remove nil lst)))
+    (apply #'+ lst)))
+
+(b) Recursive should have a terminal expression.
+
+(defun summit (lst)
+  (if (null lst)
+      0
+      (progn
+        (let ((x (car lst)))
+          (if (null x)
+              (summit (cdr lst))
+              (+ x (summit (cdr lst))))))))
+      
+
+      
